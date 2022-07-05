@@ -26,18 +26,18 @@ function PersonInfo({
     <li
       css={css`
         display: flex;
-        min-height: 140px;
+        min-height: 100px;
         justify-content: space-between;
         flex-direction: column;
         padding: 20px;
+        box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.15);
         margin: 10px 0;
         background: #fff;
         cursor: pointer;
-        box-shadow: inset
-          ${selected ? "0 0 0 3px pink" : "0px 1px 2px 0px rgba(0, 0, 0, 0.15)"};
-        width: 400px;
+        outline: ${selected ? "pink solid 3px" : "none"};
+        width: 350px;
         &:hover {
-          box-shadow: inset 0 0 0 2px pink;
+          outline: pink solid 2px;
         }
       `}
       onMouseDown={(event) => {
