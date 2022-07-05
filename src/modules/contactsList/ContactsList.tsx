@@ -48,6 +48,7 @@ export const ContactsList = ({ api }: ContactListProps) => {
           top: 0;
           background-color: #f4f4f4;
           width: 100%;
+          box-shadow: 0 0 0 10px #f4f4f4;
         `}
       >{`${SELECTED_CONTACTS}${selectedContactsNumber}`}</div>
       <ul
@@ -92,11 +93,7 @@ export const ContactsList = ({ api }: ContactListProps) => {
         </div>
       )}
       {!hasError && fetchMoreAvailable && (
-        <Button
-          disabled={isLoading}
-          onClick={fetchNextBatch}
-          text={LOAD_MORE}
-        />
+        <Button onClick={fetchNextBatch} text={LOAD_MORE} />
       )}
     </section>
   );
