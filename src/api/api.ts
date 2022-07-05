@@ -3,6 +3,7 @@ import mockData from "../mockData.json";
 import { API_BATCH_SIZE } from "./api.settings";
 
 let cursor = -1;
+let fetchMoreAvailable = true;
 
 export default async function apiData() {
   await delay(1000);
@@ -12,5 +13,9 @@ export default async function apiData() {
   cursor += 1;
   const start = cursor * API_BATCH_SIZE;
   const end = cursor * API_BATCH_SIZE + API_BATCH_SIZE;
-  return mockData.slice(start, end);
+  fetchMoreAvailable = end < mockData.length;
+  return {
+    data: mockData.slice(start, end),
+    fetchMoreAvailable,
+  };
 }
