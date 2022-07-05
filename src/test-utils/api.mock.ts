@@ -8,7 +8,7 @@ export function contactListApiMock(shouldFail?: boolean) {
   return async () => {
     await delay(1000);
     if (shouldFail) {
-      throw new Error("");
+      throw new Error("Mock Error");
     }
     cursor += 1;
     const start = cursor * API_BATCH_SIZE;
