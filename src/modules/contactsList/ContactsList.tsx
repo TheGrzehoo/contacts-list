@@ -22,7 +22,6 @@ interface ContactListProps {
 export const ContactsList = ({ api }: ContactListProps) => {
   const {
     contactsList,
-    errorMessage,
     fetchMoreAvailable,
     fetchNextBatch,
     hasError,
@@ -32,15 +31,31 @@ export const ContactsList = ({ api }: ContactListProps) => {
     onContactSelectToggle,
   } = useContactsList(api);
   return (
-    <div
+    <section
       css={css`
         display: flex;
         flex-flow: column wrap;
         align-items: center;
       `}
     >
-      <div className="selected">{`${SELECTED_CONTACTS}${selectedContactsNumber}`}</div>
-      <div className="list" role="list">
+      <div
+        css={css`
+          color: #333333;
+          font-size: 26px;
+          font-weight: 700;
+          padding: 10px 20px;
+          position: sticky;
+          top: 0;
+          background-color: #f4f4f4;
+          width: 100%;
+        `}
+      >{`${SELECTED_CONTACTS}${selectedContactsNumber}`}</div>
+      <ul
+        css={css`
+          overflow-anchor: none;
+          padding: 0;
+        `}
+      >
         {contactsList.map((contact) => (
           <PersonInfo
             key={contact.id}
@@ -48,7 +63,7 @@ export const ContactsList = ({ api }: ContactListProps) => {
             {...contact}
           />
         ))}
-      </div>
+      </ul>
       {isLoading && (
         <div
           css={css`
@@ -76,15 +91,13 @@ export const ContactsList = ({ api }: ContactListProps) => {
           <Button onClick={retryCurrentBatch} text={TRY_AGAIN} />
         </div>
       )}
-      {!hasError && (
-        <div className="fetchMoreContainer">
-          <Button
-            disabled={!fetchMoreAvailable || isLoading}
-            onClick={fetchNextBatch}
-            text={LOAD_MORE}
-          />
-        </div>
+      {!hasError && fetchMoreAvailable && (
+        <Button
+          disabled={isLoading}
+          onClick={fetchNextBatch}
+          text={LOAD_MORE}
+        />
       )}
-    </div>
+    </section>
   );
 };

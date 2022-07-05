@@ -11,9 +11,9 @@ import {
   SELECTED_CONTACTS,
   TRY_AGAIN,
 } from "src/modules/contactsList/contactsList.settings";
-import { API_BATCH_SIZE } from "../api/api.settings";
-import { contactListApiMock } from "./api.mock";
-import mockData from "../mockData.json";
+import { API_BATCH_SIZE } from "../../api/api.settings";
+import { contactListApiMock } from "../../test-utils/api.mock";
+import mockData from "../../mockData.json";
 import { ContactsList } from "src/modules/contactsList/ContactsList";
 
 describe("[ContactsList]", () => {

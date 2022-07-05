@@ -25,6 +25,16 @@ export const useContactsList = (
     }, 0);
   }, [contactsList]);
 
+  const sortedContactsList = [...contactsList].sort((contactA, contactB) => {
+    if (contactA.selected && contactB.selected) {
+      return 0;
+    } else if (contactA.selected && !contactB.selected) {
+      return -1;
+    } else {
+      return 1;
+    }
+  });
+
   const onContactSelectToggle = (contactId: string) => {
     setContactsList((currentContactsList) =>
       currentContactsList.map((contact) => {
@@ -54,15 +64,7 @@ export const useContactsList = (
   }, [contactsListApiState]);
 
   return {
-    contactsList: [...contactsList].sort((contactA, contactB) => {
-      if (contactA.selected && contactB.selected) {
-        return 0;
-      } else if (contactA.selected && !contactB.selected) {
-        return -1;
-      } else {
-        return 1;
-      }
-    }),
+    contactsList: sortedContactsList,
     fetchMoreAvailable:
       contactsListApiState.type === ContactsListApiStateEnum.Loaded &&
       contactsListApiState.fetchMoreAvailable,
@@ -71,10 +73,6 @@ export const useContactsList = (
     onContactSelectToggle,
     isLoading: contactsListApiState.type === ContactsListApiStateEnum.Loading,
     hasError: contactsListApiState.type === ContactsListApiStateEnum.Error,
-    errorMessage:
-      contactsListApiState.type === ContactsListApiStateEnum.Error
-        ? contactsListApiState.errorMessage
-        : null,
     selectedContactsNumber,
   };
 };

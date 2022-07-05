@@ -23,25 +23,28 @@ function PersonInfo({
 }: PersonInfoProps) {
   const initials = createInitials(firstNameLastName);
   return (
-    <div
+    <li
       css={css`
         display: flex;
-        min-height: 100px;
+        min-height: 140px;
         justify-content: space-between;
         flex-direction: column;
         padding: 20px;
-        box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.15);
         margin: 10px 0;
         background: #fff;
         cursor: pointer;
-        outline: ${selected ? "pink solid 3px" : "none"};
-        width: 350px;
+        box-shadow: inset
+          ${selected ? "0 0 0 3px pink" : "0px 1px 2px 0px rgba(0, 0, 0, 0.15)"};
+        width: 400px;
         &:hover {
-          outline: pink solid 2px;
+          box-shadow: inset 0 0 0 2px pink;
         }
       `}
-      role="listitem"
-      onClick={() => onSelect(id)}
+      onMouseDown={(event) => {
+        event.stopPropagation();
+        event.preventDefault();
+        onSelect(id);
+      }}
     >
       <div
         css={css`
@@ -56,8 +59,8 @@ function PersonInfo({
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 25px;
-            width: 25px;
+            height: 37px;
+            width: 37px;
             border-radius: 50%;
             border: 1px solid #000;
             margin-right: 10px;
@@ -112,7 +115,7 @@ function PersonInfo({
       >
         {emailAddress}
       </div>
-    </div>
+    </li>
   );
 }
 

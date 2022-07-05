@@ -21,7 +21,7 @@ interface LoadingContactsListApiState {
 interface ErrorContactsListApiState {
   type: ContactsListApiStateEnum.Error;
   contactsList: ContactResponse[];
-  errorMessage: string;
+  error: Error;
 }
 
 export const useContactsListApi = (
@@ -54,7 +54,7 @@ export const useContactsListApi = (
           setContactsListApiState({
             type: ContactsListApiStateEnum.Error,
             contactsList: [],
-            errorMessage: error.message,
+            error,
           });
         });
     },
